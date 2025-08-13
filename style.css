@@ -38,6 +38,19 @@ video {
 /* Storing custom CSS properties */
 /* https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascading_variables/Using_CSS_custom_properties */
 
+:root {
+  --col01: rgb(255, 255, 255);
+  --col02: rgb(0, 89, 255);
+  --col03: rgb(142, 142, 255);
+  --border: solid 0.1rem var(--col02);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --col02: rgb(255, 255, 255);
+    --col01: rgb(0, 89, 255);
+  }
+}
+
 /* .:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:. .:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:._.:*~*:.  */
 /* Intro Modal dialog */
 /* need to apply to open dialog, otherwise flex interferes with closing */
@@ -45,9 +58,9 @@ video {
 dialog[open] {
   margin: auto; /* place in centre */
   padding: 1rem;
-  /* background-color: var(--col01); */
-  /* color: var(--col02); */
-  /* border: var(--border); */
+  background-color: var(--col01);
+  color: var(--col02);
+  border: var(--border);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -62,7 +75,148 @@ dialog::backdrop {
   ); /* background overlay when modal is open */
 }
 #dialogCloseButton {
-  /* background-color: var(--col01); */
-  /* color: var(--col02); */
+  background-color: var(--col01);
+  color: var(--col02);
   padding: 0 1rem;
+}
+
+.keyboardCont {
+  display: flex;
+  height: 10rem;
+}
+
+.octaveCont {
+  position: relative;
+  width: 15rem;
+}
+
+.whiteKeyCont {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: stretch;
+}
+
+.whiteKey {
+  flex: 1;
+  background-color: var(--col02);
+}
+
+.whiteKey:hover {
+  cursor: pointer;
+}
+
+.whiteKey:active {
+  background-color: darkseagreen;
+}
+
+.blackKeyCont {
+  position: absolute;
+  top: 0%;
+  display: flex;
+  height: 50%;
+  width: 100%;
+  align-items: stretch;
+}
+
+.blackKey {
+  flex: 1;
+  background-color: var(--col03);
+}
+
+.ghostKey {
+  flex: 0.5;
+  opacity: 0;
+  pointer-events: none;
+}
+
+input[type="range"] {
+  width: 25%;
+  margin: 3.3px 0;
+  background-color: transparent;
+  -webkit-appearance: none;
+}
+input[type="range"]:focus {
+  outline: var(--col02);
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  background: var(--col02);
+  border: 0.2px solid var(--col01);
+  border-radius: 1.3px;
+  width: 25%;
+  height: 8.4px;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  margin-top: -3.5px;
+  width: 35px;
+  height: 15px;
+  background: #8a4c63;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+input[type="range"]:focus::-webkit-slider-runnable-track {
+  background: #0074ae;
+}
+input[type="range"]::-moz-range-track {
+  background: #0071a9;
+  border: 0.2px solid #010101;
+  border-radius: 1.3px;
+  width: 25%;
+  height: 8.4px;
+  cursor: pointer;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 35px;
+  height: 15px;
+  background: #8a4c63;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  cursor: pointer;
+}
+input[type="range"]::-ms-track {
+  background: transparent;
+  border-color: transparent;
+  border-width: 4.3px 0;
+  color: transparent;
+  width: 25%;
+  height: 8.4px;
+  cursor: pointer;
+}
+input[type="range"]::-ms-fill-lower {
+  background: #006ea4;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+}
+input[type="range"]::-ms-fill-upper {
+  background: #0071a9;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+}
+input[type="range"]::-ms-thumb {
+  width: 35px;
+  height: 15px;
+  background: #8a4c63;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 0px;
+  /*Needed to keep the Edge thumb centred*/
+}
+input[type="range"]:focus::-ms-fill-lower {
+  background: #0071a9;
+}
+input[type="range"]:focus::-ms-fill-upper {
+  background: #0074ae;
+}
+/*TODO: Use one of the selectors from https://stackoverflow.com/a/20541859/7077589 and figure out
+how to remove the virtical space around the range input in IE*/
+@supports (-ms-ime-align: auto) {
+  /* Pre-Chromium Edge only styles, selector taken from hhttps://stackoverflow.com/a/32202953/7077589 */
+  input[type="range"] {
+    margin: 0;
+    /*Edge starts the margin from the thumb, not the track as other browsers do*/
+  }
 }
