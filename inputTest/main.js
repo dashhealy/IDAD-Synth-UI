@@ -1,26 +1,49 @@
+let bodyElement = document.body;
+let myButton = document.getElementById("exampleButton");
+
+function changeBodyBackgroundColour() {
+  bodyElement.style.backgroundColor = "red";
+}
+
+function playSynthesizerNote(event) {
+  console.log(event);
+  let note = "f3";
+  polySynth.triggerAttackRelease(note, "8n");
+}
+
+myButton.addEventListener("click", playSynthesizerNote);
+
+function checkWindowWidth() {
+  let windowWidth = window.innerWidth;
+  buttonOutputText.textContent = windowWidth;
+}
+
+myButton.addEventListener("click", checkWindowWidth);
+
 ///////////// Button
 
 let buttonOutputText = document.getElementById("buttonOutput");
 let buttonEventText = document.getElementById("currentButtonEvent");
 let heldButtonText = document.getElementById("buttonHeldEvent");
 
-/* 
-myButton.addEventListener("mouseenter", () => { 
+myButton.addEventListener("mouseenter", () => {
   buttonEventText.textContent = "mouseenter";
 });
 
-myButton.addEventListener("mouseleave", () => { 
+myButton.addEventListener("mouseleave", () => {
   buttonEventText.textContent = "mouseleave";
 });
 
-myButton.addEventListener("mousedown", () => { 
+myButton.addEventListener("mousedown", () => {
+  heldButtonText.textContent = "true";
   buttonEventText.textContent = "mousedown";
 });
 
-myButton.addEventListener("mouseup", () => { 
+myButton.addEventListener("mouseup", () => {
+  heldButtonText.textContent = "false";
   buttonEventText.textContent = "mouseup";
 });
- */
+
 ///////////// Checkbox
 let myCheckbox = document.getElementById("exampleCheckbox");
 let checkboxOutputText = document.getElementById("checkboxOutput");
@@ -40,12 +63,17 @@ distCheckbox.addEventListener("click", (e) => {
   toggleDistortion(isChecked);
 });
 
+verbCheckbox.addEventListener("click", (e) => {
+  let isChecked = e.target.checked;
+  toggleReverb(isChecked);
+});
+
 ///////////// Radio
 let mySineRadio = document.getElementById("sine");
 let myTriangleRadio = document.getElementById("triangle");
 let radioOutputText = document.getElementById("radioOutput");
 
-function listRadioSelection(e){
+function listRadioSelection(e) {
   radioOutputText.textContent = e.target.value;
 }
 
@@ -68,10 +96,8 @@ myRange.addEventListener("input", (e) => {
   rangeOutputText.textContent = e.target.value;
 });
 
-function rangeEditStart(){
-  
-}
-function rangeEditEnd(){
+function rangeEditStart() {}
+function rangeEditEnd() {
   console.log("mouse up event heard");
 }
 
@@ -81,7 +107,7 @@ let colourOutputText = document.getElementById("colourOutput");
 
 myColourPicker.addEventListener("input", listColourOutput);
 
-function listColourOutput(e){
+function listColourOutput(e) {
   colourOutputText.textContent = e.target.value;
   colourOutputText.style.backgroundColor = e.target.value;
   colourOutputText.style.color = `hsl(from ${e.target.value} calc(360 - h) s calc(100 - l))`;

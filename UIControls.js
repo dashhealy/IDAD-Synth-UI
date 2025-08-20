@@ -89,8 +89,8 @@ function changeDistortionAmount(newDistAmt) {
   }
 }
 
-function toggleDistortion(distortionOn){
-  if(distortionOn){
+function toggleDistortion(distortionOn) {
+  if (distortionOn) {
     distortion.wet.value = 1;
   } else {
     distortion.wet.value = 0;
@@ -109,8 +109,8 @@ function changeReverbDecay(newVerbDecayAmt) {
   reverb.set({ decay: newVerbDecayAmt });
 }
 
-function toggleReverb(verbOn){
-  if(verbOn){
+function toggleReverb(verbOn) {
+  if (verbOn) {
     reverb.wet.value = 1;
   } else {
     reverb.wet.value = 0;
@@ -152,8 +152,3 @@ function changeFilterQ(newFilterQ) {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////// Connections
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-testRange.addEventListener("input", (e) => {
-  let rangeValue = e.target.value;
-  changeFilterFreq(rangeValue);
-});
